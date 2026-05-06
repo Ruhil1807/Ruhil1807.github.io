@@ -189,22 +189,25 @@
       <div class="form-label-sm">Message Me</div>
       <h2 class="form-title">Send a note</h2>
       <p class="form-sub">Share a role, project, collaboration idea, or just say hello. I will respond as soon as I can.</p>
-      <div class="field">
-        <label>Name</label>
-        <input type="text" placeholder="Your name" />
-      </div>
-      <div class="field">
-        <label>Email</label>
-        <input type="email" placeholder="your@email.com" />
-      </div>
-      <div class="field">
-        <label>Message</label>
-        <textarea placeholder="Tell me a little about the opportunity or project."></textarea>
-      </div>
-      <a class="send-btn" href="mailto:ruhilpatel0718@gmail.com" id="sendBtn">
-        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-        Send Message
-      </a>
+      <form id="contactForm" action="https://formspree.io/f/xrejlpvr" method="POST">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" name="name" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="field">
+          <label>Message</label>
+          <textarea name="message" placeholder="Tell me a little about the opportunity or project." required></textarea>
+        </div>
+        <button type="submit" class="send-btn" id="sendBtn">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          Send Message
+        </button>
+        <p id="form-status" style="margin-top:0.85rem;font-size:0.85rem;text-align:center;display:none;"></p>
+      </form>
     </div>
 
   </div>
@@ -225,16 +228,47 @@
     );
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Wire up Send button to open mailto with form values
-    document.getElementById('sendBtn').addEventListener('click', function(e) {
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('form-status');
+    const btn = document.getElementById('sendBtn');
+
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const name = document.querySelector('input[type=text]').value.trim();
-      const email = document.querySelector('input[type=email]').value.trim();
-      const msg = document.querySelector('textarea').value.trim();
-      const subject = encodeURIComponent('Portfolio Contact' + (name ? ' from ' + name : ''));
-      const body = encodeURIComponent((name ? 'Name: ' + name + '\n' : '') + (email ? 'Email: ' + email + '\n\n' : '') + msg);
-      window.location.href = 'mailto:ruhilpatel0718@gmail.com?subject=' + subject + '&body=' + body;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;animation:spin 1s linear infinite"><path d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8z"/></svg> Sending...';
+      btn.style.opacity = '0.75';
+      btn.disabled = true;
+
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          status.style.color = '#3fb950';
+          status.textContent = '✓ Message sent! I will get back to you as soon as I can.';
+          status.style.display = 'block';
+          form.reset();
+          btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Sent!';
+          btn.style.opacity = '1';
+        } else {
+          throw new Error('Failed');
+        }
+      } catch {
+        status.style.color = '#f85149';
+        status.textContent = '✗ Something went wrong. Please email me directly at ruhilpatel0718@gmail.com';
+        status.style.display = 'block';
+        btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg> Send Message';
+        btn.style.opacity = '1';
+        btn.disabled = false;
+      }
     });
   </script>
+  <style>
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    button.send-btn { border: none; font-family: inherit; cursor: pointer; }
+    button.send-btn:disabled { cursor: not-allowed; }
+  </style>
 </body>
 </html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruhil Patel – Contact</title>
+  <style>
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #21262d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --gold: #e3a008;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --card: #1c2128;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13,17,23,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 0 2.5rem; height: 60px; }
+    .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--text); text-decoration: none; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif; }
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.88rem; padding: 0.4rem 0.9rem; border-radius: 999px; transition: all 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { background: var(--card); border: 1px solid var(--border); color: var(--text); }
+    footer { padding: 1.5rem 2.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 600px) { nav { padding: 0 1.2rem; } .nav-links { gap: 0; } }
+
+
+    /* BANNER */
+    .page-banner { padding: 100px 2.5rem 3rem; max-width: 1100px; margin: 0 auto; }
+    .banner-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.1rem; }
+    .banner-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.4rem, 4.8vw, 4rem);
+      font-weight: 900; line-height: 1.08; color: var(--text);
+      margin-bottom: 1.25rem; letter-spacing: -0.02em; max-width: 820px;
+    }
+    .banner-sub { font-size: 0.95rem; color: var(--muted); max-width: 620px; line-height: 1.7; }
+
+    /* TWO-COL LAYOUT */
+    .contact-grid {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 2.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* LEFT – DIRECT */
+    .direct-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 2rem 2rem;
+    }
+    .direct-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.75rem; }
+    .direct-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.7rem; font-weight: 900; line-height: 1.2;
+      color: var(--text); margin-bottom: 1.6rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.75rem; }
+    .contact-link-row { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.87rem; color: var(--muted); }
+    .contact-link-row::before { content: '●'; color: var(--accent2); font-size: 0.5rem; margin-top: 0.42em; flex-shrink: 0; }
+    .contact-link-row a { color: var(--gold); text-decoration: none; font-weight: 600; word-break: break-all; transition: opacity 0.2s; }
+    .contact-link-row a:hover { opacity: 0.75; }
+    .contact-link-row span { color: var(--muted); }
+    .social-row { display: flex; gap: 0.6rem; }
+    .social-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .social-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .social-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* RIGHT – FORM */
+    .form-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 2rem 2rem;
+    }
+    .form-label-sm { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.6rem; }
+    .form-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.9rem; font-weight: 900; color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .form-sub { font-size: 0.87rem; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.6; }
+    .field { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.1rem; }
+    .field label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .field input, .field textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.8rem 1rem;
+      font-size: 0.88rem; color: var(--text);
+      font-family: inherit; width: 100%;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none; resize: vertical;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--muted); }
+    .field input:focus, .field textarea:focus { border-color: var(--accent2); background: rgba(63,185,80,0.04); }
+    .field textarea { min-height: 150px; }
+    .send-btn {
+      width: 100%; padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, var(--accent2), #58d68d);
+      border: none; border-radius: 999px;
+      color: #0d1117; font-weight: 700; font-size: 0.95rem;
+      font-family: inherit; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none; margin-top: 0.5rem;
+    }
+    .send-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .send-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    @media (max-width: 820px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .page-banner { padding: 90px 1.5rem 2.5rem; }
+      .contact-grid { padding: 0 1.5rem 4rem; }
+    }
+    @media (max-width: 500px) {
+      .page-banner { padding: 90px 1.2rem 2rem; }
+      .contact-grid { padding: 0 1.2rem 3rem; }
+      .direct-card, .form-card { padding: 1.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">Ruhil Patel</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-banner fade-in">
+    <div class="banner-label">Contact</div>
+    <h1 class="banner-title">Let&#8217;s build something — internships, projects, or collaborations welcome.</h1>
+    <p class="banner-sub">Whether it's a project, or an opportunity in software, data science, AI, or cloud — I'm always happy to hear from you. Reach out and let's see what we can build together.</p>
+  </div>
+
+  <div class="contact-grid">
+
+    <!-- LEFT -->
+    <div class="direct-card fade-in">
+      <div class="direct-label">Direct</div>
+      <h2 class="direct-title">Best ways to reach me</h2>
+      <div class="contact-links">
+        <div class="contact-link-row">
+          <span>Email: </span><a href="mailto:ruhilpatel0718@gmail.com">ruhilpatel0718@gmail.com</a>
+        </div>
+        <div class="contact-link-row">
+          <span>GitHub: </span><a href="https://github.com/Ruhil1807" target="_blank" rel="noopener">github.com/Ruhil1807</a>
+        </div>
+        <div class="contact-link-row">
+          <span>LinkedIn: </span><a href="https://www.linkedin.com/in/ruhil-patel-955101271/" target="_blank" rel="noopener">linkedin.com/in/ruhil-patel-955101271</a>
+        </div>
+      </div>
+      <div class="social-row">
+        <a class="social-btn" href="https://www.linkedin.com/in/ruhil-patel-955101271/" target="_blank" rel="noopener" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        </a>
+        <a class="social-btn" href="https://github.com/Ruhil1807" target="_blank" rel="noopener" title="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        </a>
+        <a class="social-btn" href="mailto:ruhilpatel0718@gmail.com" title="Email">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="form-card fade-in">
+      <div class="form-label-sm">Message Me</div>
+      <h2 class="form-title">Send a note</h2>
+      <p class="form-sub">Share a role, project, collaboration idea, or just say hello. I will respond as soon as I can.</p>
+      <div class="field">
+        <label>Name</label>
+        <input type="text" placeholder="Your name" />
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com" />
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea placeholder="Tell me a little about the opportunity or project."></textarea>
+      </div>
+      <a class="send-btn" href="mailto:ruhilpatel0718@gmail.com" id="sendBtn">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        Send Message
+      </a>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 Ruhil Patel. Built to keep improving.</span>
+      <span><a href="mailto:ruhilpatel0718@gmail.com">ruhilpatel0718@gmail.com</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Wire up Send button to open mailto with form values
+    document.getElementById('sendBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      const name = document.querySelector('input[type=text]').value.trim();
+      const email = document.querySelector('input[type=email]').value.trim();
+      const msg = document.querySelector('textarea').value.trim();
+      const subject = encodeURIComponent('Portfolio Contact' + (name ? ' from ' + name : ''));
+      const body = encodeURIComponent((name ? 'Name: ' + name + '\n' : '') + (email ? 'Email: ' + email + '\n\n' : '') + msg);
+      window.location.href = 'mailto:ruhilpatel0718@gmail.com?subject=' + subject + '&body=' + body;
+    });
+  </script>
+</body>
+</html>

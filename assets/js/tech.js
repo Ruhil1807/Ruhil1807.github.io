@@ -72,7 +72,7 @@
 
   const lines = [
     { prompt: 'whoami', out: 'ruhil_patel — B.S. Computer Science, Rutgers University' },
-    { prompt: 'cat status.txt', out: 'open_to_internships: true · open_to_new_grad_roles: true' },
+    { prompt: 'cat status.txt', out: 'currently: IoT Engineer @ Cognizant' },
     { prompt: 'ls interests/', out: 'data-engineering/  cloud-infra/  ai-ml/  cybersecurity/' },
     { prompt: 'stack --primary', out: 'python · java · sql · aws · react · tensorflow' },
   ];
